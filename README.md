@@ -2,7 +2,7 @@
 
 A simple web app where users can **post, search, and filter recipes with tags**. Built with Python, Streamlit, and SQLite.
 
-**Live demo:** _add your Streamlit URL here (e.g. https://your-app.streamlit.app)_
+**Live demo:** https://recipe-app-37nuhdlqmmp8uj5gmzvkzf.streamlit.app/
 
 ## Features
 
@@ -65,31 +65,18 @@ recipe-app/
    ```
    Then open http://localhost:8501.
 
-> If `streamlit` isn't recognized, use `python -m streamlit run app.py`.
+
 
 ## How to Use
 
 - **Browse recipes tab:** type in the search box to match titles or ingredients, and pick tags to narrow results.
 - **Post a recipe tab:** fill in the form (title, ingredients, and steps are required) and add tags separated by commas, e.g. `vegan, dessert, quick`.
 
-## Deploy on Streamlit Community Cloud
 
-1. Push this repo to GitHub (public).
-2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub.
-3. Click **Create app**, choose this repo, branch `main`, and main file `app.py`.
-4. Click **Deploy**.
 
 ### Note on data persistence
 
 Streamlit Community Cloud has an ephemeral filesystem, so the SQLite file (`recipes.db`) may reset when the app restarts or redeploys. For permanent storage, switch to a hosted database such as Supabase or Neon and keep credentials in Streamlit **Secrets**.
-
-## Roadmap
-
-- [ ] Persistent hosted database
-- [ ] User login (authors can only delete their own recipes)
-- [ ] Image uploads
-- [ ] Ratings and favorites
-- [ ] Sort options (newest, most liked)
 
 ## License
 
