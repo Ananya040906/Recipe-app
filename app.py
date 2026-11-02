@@ -1,10 +1,12 @@
 import sqlite3
 from datetime import datetime
 import streamlit as st
+from seed import RECIPES
 
 DB = "recipes.db"
 
 # ---------- Database ----------
+
 def get_conn():
     return sqlite3.connect(DB)
 
@@ -41,10 +43,18 @@ def delete_recipe(recipe_id):
     with get_conn() as c:
         c.execute("DELETE FROM recipes WHERE id = ?", (recipe_id,))
 
+def seed_if_empty():
+    with get_conn() as c:
+        count = c.execute("SELECT COUNT(*) FROM recipes").fetchone()[0]
+    if count == 0:
+        for r in RECIPES:
+            add_recipe(r["title"], r["author"], r["ingredients"], r["steps"], r["tags"])
+
 # ---------- UI ----------
 st.set_page_config(page_title="Recipe Share", page_icon="🍲", layout="wide")
 init_db()
-st.title("🍲 Recipe Sharing App")
+seed_if_empty()
+st.title("Recipe Sharing App")
 
 tab_browse, tab_post = st.tabs(["Browse recipes", "Post a recipe"])
 
@@ -70,7 +80,7 @@ with tab_browse:
     all_tags = sorted({t for r in recipes for t in r["tags"].split(",") if t})
 
     col1, col2 = st.columns([2, 1])
-    search = col1.text_input("🔍 Search by title or ingredient")
+    search = col1.text_input("Search by title or ingredient")
     selected_tags = col2.multiselect("Filter by tags", all_tags)
 
     def matches(r):

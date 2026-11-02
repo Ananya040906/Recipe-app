@@ -1,4 +1,4 @@
-# 🍲 Recipe Sharing App
+# Recipe Sharing App
 
 A simple web app where users can **post, search, and filter recipes with tags**. Built with Python, Streamlit, and SQLite.
 
